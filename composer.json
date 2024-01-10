@@ -1,0 +1,44 @@
+{
+	"name": "netzhirsch/slider-bundle",
+    "description": "Slider Inhaltselement",
+	"version": "0.1.0",
+    "keywords": [
+	
+	],
+    "type": "contao-bundle",
+    "license": "LGPL-3.0-or-later",
+    "homepage": "https://www.netzhirsch.de/",
+    "authors": [
+        {
+            "name": "Netzhirsch GmbH",
+            "homepage": "https://www.netzhirsch.de"
+        }
+    ],
+    "support": {
+        "email": "luhmann@netzhirsch.de"
+    },
+    "require": {
+        "php": ">=7.0",
+        "contao/core-bundle": "^4.4"
+    },
+    "conflict": {
+        "contao/core": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/ContaoManager/Plugin.php",
+            "src/Resources/contao/"
+        ],
+        "psr-4": {
+            "Netzhirsch\\SliderBundle\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "src/Resources/contao/config/",
+            "src/Resources/contao/dca/",
+            "src/Resources/contao/languages/"
+        ]
+    },
+    "extra": {
+        "contao-manager-plugin": "Netzhirsch\\SliderBundle\\ContaoManager\\Plugin"
+    }
+}

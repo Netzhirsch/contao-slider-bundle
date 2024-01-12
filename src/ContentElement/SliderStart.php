@@ -44,14 +44,14 @@ class SliderStart extends ContentElement
         } else {
             $publicDir = 'public';
         }
-        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.css|static';
-        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick-theme.css|static';
-        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.min.js|static';
+        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick.css|static';
+        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick-theme.css|static';
+        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick.min.js|static';
         /** @var EntityManagerInterface $em */
         $em = System::getContainer()->get('doctrine.orm.entity_manager');
         $repo = $em->getRepository(Slider::class);
         $slider = $repo->findOneBy(['contentElementId' => $this->id,'breakpoint' => 'xs']);
-        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/mySlick-'.$slider->getVersion().'.js|static';
+        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlick-'.$slider->getVersion().'.js|static';
         return parent::generate();
     }
 

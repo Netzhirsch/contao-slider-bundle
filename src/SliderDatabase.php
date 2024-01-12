@@ -111,15 +111,12 @@ class SliderDatabase
             .DIRECTORY_SEPARATOR
             .'netzhirsch'
             .DIRECTORY_SEPARATOR
-            .'slider-bundle'
-            .DIRECTORY_SEPARATOR
-            .'src'
-            .DIRECTORY_SEPARATOR
-            .'Resources'
+            .'contao-slider-bundle'
             .DIRECTORY_SEPARATOR
             .'public'
         ;
         $jsFile = $dir.DIRECTORY_SEPARATOR.'mySlickDefault.js';
+
         $version = 1;
         /** @var Slider $slider */
         foreach ($sliders as $slider) {
@@ -133,7 +130,10 @@ class SliderDatabase
             $content = str_replace('__setting__', json_encode($settings),$content );
             $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-'.$version.'.js';
             file_put_contents($filename, $content);
-            unlink($dir.DIRECTORY_SEPARATOR.'mySlick-'.--$version.'.js');
+            $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-'.--$version.'.js';
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
         }
         $em->flush();
     }

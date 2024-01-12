@@ -1,2 +1,2 @@
-<div class="nh-slick">
+<div class="nh-slick-<?= $this->id ?>">
     <div class="slick-child">

@@ -4,17 +4,22 @@ namespace Netzhirsch\ContaoSliderBundle;
 
 use Contao\DC_Table;
 use Contao\System;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
 use Netzhirsch\ContaoSliderBundle\Repository\SliderRepository;
 
 class SliderDatabase
 {
     private EntityManagerInterface $entityManager;
+    private ManagerRegistry $managerRegistry;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager,ManagerRegistry $managerRegistry)
     {
         $this->entityManager = $entityManager;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -43,6 +48,12 @@ class SliderDatabase
         }  else {
             throw new \Exception('Keinen setter Method für '.$methodName.' gefunden');
         }
+
+        if (!$em->isOpen()) {
+            $em = $this->managerRegistry->resetManager();
+        }
+        $em->persist($slider);
+        $em->flush();
 
         // workaround to disable default save method
         if ($this->isSliderContent($dc)) {
@@ -115,7 +126,7 @@ class SliderDatabase
             .DIRECTORY_SEPARATOR
             .'public'
         ;
-        $jsFile = $dir.DIRECTORY_SEPARATOR.'mySlickDefault.js';
+        $jsFile = $dir.DIRECTORY_SEPARATOR.'mySlickTemplate.js';
 
         $version = 1;
         /** @var Slider $slider */
@@ -127,10 +138,11 @@ class SliderDatabase
         }
         if (file_exists($jsFile) && count($settings) > 0) {
             $content = file_get_contents($jsFile);
-            $content = str_replace('__setting__', json_encode($settings),$content );
-            $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-'.$version.'.js';
+            $content = str_replace('__setting__', json_encode($settings),$content);
+            $content = str_replace('__class__', "'.nh-slick-".$dc->id."'",$content);
+            $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$dc->id.'-v-'.$version.'.js';
             file_put_contents($filename, $content);
-            $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-'.--$version.'.js';
+            $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$dc->id.'-v-'.--$version.'.js';
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }

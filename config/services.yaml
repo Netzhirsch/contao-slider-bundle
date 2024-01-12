@@ -6,6 +6,7 @@ services:
     public: true
     arguments:
       - '@doctrine.orm.entity_manager'
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
 
   Netzhirsch\ContaoSliderBundle\Repository\SliderRepository:
     arguments:

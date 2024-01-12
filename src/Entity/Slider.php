@@ -22,7 +22,7 @@ class Slider
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $autoplay = false;
     #[ORM\Column(type: 'integer', options: ['default' => 3000])]
-    private ?int $autoplaySpeed = null;
+    private ?int $autoplaySpeed = 3000;
     #[ORM\Column(length: 9, options: ['default' => 'inherited'])]
     private string $arrows = 'inherited';
     #[ORM\Column(length: 255,nullable: true)]
@@ -40,7 +40,7 @@ class Slider
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $initialSlide = null;
     #[ORM\Column(length: 12, options: ['default' => 'ondemand'])]
-    private ?string $lazyLoad = null;
+    private ?string $lazyLoad = 'ondemand';
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $pauseOnFocus = false;
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
@@ -48,11 +48,11 @@ class Slider
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $pauseOnDotsHover = false;
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
-    private ?int $slidesToShow = null;
+    private ?int $slidesToShow = 1;
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
-    private ?int $slidesToScroll = null;
+    private ?int $slidesToScroll = 1;
     #[ORM\Column(type: 'integer', options: ['default' => 300])]
-    private ?int $speed = null;
+    private ?int $speed = 300;
     #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $swipe = true;
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
@@ -62,9 +62,9 @@ class Slider
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $variableWidth = false;
     #[ORM\Column(type: 'integer', options: ['default' => 1000])]
-    private ?int $zIndex = null;
+    private ?int $zIndex = 1000;
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
-    private ?int $version = null;
+    private ?int $version = 1;
 
     public function getId(): ?int
     {

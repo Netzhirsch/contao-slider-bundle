@@ -51,7 +51,11 @@ class SliderStart extends ContentElement
         $em = System::getContainer()->get('doctrine.orm.entity_manager');
         $repo = $em->getRepository(Slider::class);
         $slider = $repo->findOneBy(['contentElementId' => $this->id,'breakpoint' => 'xs']);
-        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlick-'.$slider->getVersion().'.js|static';
+        if (empty($slider)) {
+            $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlickDefault.js|static';
+        } else {
+            $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlick-ceId-'.$this->id.'-v-'.$slider->getVersion().'.js|static';
+        }
         return parent::generate();
     }
 

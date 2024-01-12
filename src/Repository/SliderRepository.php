@@ -1,10 +1,10 @@
 <?php
 
-namespace Netzhirsch\SliderBundle\Repository;
+namespace Netzhirsch\ContaoSliderBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-use Netzhirsch\SliderBundle\Entity\Slider;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Netzhirsch\ContaoSliderBundle\Entity\Slider;
 
 /**
  * @extends ServiceEntityRepository<Slider>

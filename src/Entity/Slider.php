@@ -1,9 +1,9 @@
 <?php
 
-namespace Netzhirsch\SliderBundle\Entity;
+namespace Netzhirsch\ContaoSliderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Netzhirsch\SliderBundle\Repository\SliderRepository;
+use Netzhirsch\ContaoSliderBundle\Repository\SliderRepository;
 
 #[ORM\Entity(repositoryClass: SliderRepository::class)]
 #[ORM\Table(name: 'tl_nh_slider')]

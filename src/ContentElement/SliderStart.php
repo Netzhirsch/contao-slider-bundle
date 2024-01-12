@@ -1,12 +1,12 @@
 <?php
 
-namespace Netzhirsch\SliderBundle\ContentElement;
+namespace Netzhirsch\ContaoSliderBundle\ContentElement;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\System;
 use Doctrine\ORM\EntityManagerInterface;
-use Netzhirsch\SliderBundle\Entity\Slider;
+use Netzhirsch\ContaoSliderBundle\Entity\Slider;
 
 class SliderStart extends ContentElement
 {
@@ -46,9 +46,6 @@ class SliderStart extends ContentElement
         }
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.css|static';
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick-theme.css|static';
-        if (!$this->isJsAlreadyLoaded('cookie.min.js')) {
-            $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/libraries/jquery/jquery.min.js|static';
-        }
         $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.min.js|static';
         /** @var EntityManagerInterface $em */
         $em = System::getContainer()->get('doctrine.orm.entity_manager');
@@ -63,16 +60,6 @@ class SliderStart extends ContentElement
      */
     protected function compile()
     {
-    }
-
-    private function isJsAlreadyLoaded($filename): bool
-    {
-        foreach ($GLOBALS['TL_JAVASCRIPT'] as $javascript) {
-            if (strrpos($javascript,$filename) !== false){
-                return true;
-            }
-        }
-        return false;
     }
 
 }

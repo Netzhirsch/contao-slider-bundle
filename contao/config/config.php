@@ -1,8 +1,8 @@
 <?php
 
-use Netzhirsch\SliderBundle\ContentElement\SliderStart;
-use Netzhirsch\SliderBundle\ContentElement\SliderEnd;
-use Netzhirsch\SliderBundle\ContentElement\SlideDivider;
+use Netzhirsch\ContaoSliderBundle\ContentElement\SliderStart;
+use Netzhirsch\ContaoSliderBundle\ContentElement\SliderEnd;
+use Netzhirsch\ContaoSliderBundle\ContentElement\SlideDivider;
 
 $GLOBALS['TL_CTE']['netzhirsch_element_slider']['slider_start'] = SliderStart::class;
 $GLOBALS['TL_CTE']['netzhirsch_element_slider']['slider_end'] = SliderEnd::class;

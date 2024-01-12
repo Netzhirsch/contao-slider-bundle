@@ -1,6 +1,6 @@
 <?php
 
-namespace Netzhirsch\SliderBundle\ContentElement;
+namespace Netzhirsch\ContaoSliderBundle\ContentElement;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;

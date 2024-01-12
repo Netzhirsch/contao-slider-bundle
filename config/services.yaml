@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autoconfigure: true
+
+  Netzhirsch\ContaoSliderBundle\SliderDatabase:
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  Netzhirsch\ContaoSliderBundle\Repository\SliderRepository:
+    arguments:
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
+    tags: [ 'doctrine.repository_service' ]

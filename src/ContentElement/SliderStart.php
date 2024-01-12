@@ -38,18 +38,23 @@ class SliderStart extends ContentElement
 
             return $objTemplate->parse();
         }
-
-        $GLOBALS['TL_CSS'][] = 'web/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.css|static';
-        $GLOBALS['TL_CSS'][] = 'web/bundles/netzhirschslider/libraries/slick-carousel/slick/slick-theme.css|static';
-        if (!$this->isJsAlreadyLoaded('cookie.min.js')) {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'web/bundles/netzhirschslider/libraries/jquery/jquery.min.js|static';
+        $buildDir = System::getContainer()->get('kernel')->getProjectDir();
+        if (file_exists($buildDir.DIRECTORY_SEPARATOR.'web')) {
+            $publicDir = 'web';
+        } else {
+            $publicDir = 'public';
         }
-        $GLOBALS['TL_JAVASCRIPT'][] = 'web/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.min.js|static';
+        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.css|static';
+        $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick-theme.css|static';
+        if (!$this->isJsAlreadyLoaded('cookie.min.js')) {
+            $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/libraries/jquery/jquery.min.js|static';
+        }
+        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/libraries/slick-carousel/slick/slick.min.js|static';
         /** @var EntityManagerInterface $em */
         $em = System::getContainer()->get('doctrine.orm.entity_manager');
         $repo = $em->getRepository(Slider::class);
         $slider = $repo->findOneBy(['contentElementId' => $this->id,'breakpoint' => 'xs']);
-        $GLOBALS['TL_JAVASCRIPT'][] = 'web/bundles/netzhirschslider/mySlick-'.$slider->getVersion().'.js|static';
+        $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/netzhirschslider/mySlick-'.$slider->getVersion().'.js|static';
         return parent::generate();
     }
 

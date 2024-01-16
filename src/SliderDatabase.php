@@ -4,10 +4,8 @@ namespace Netzhirsch\ContaoSliderBundle;
 
 use Contao\DC_Table;
 use Contao\System;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
 use Netzhirsch\ContaoSliderBundle\Repository\SliderRepository;
 

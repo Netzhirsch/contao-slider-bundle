@@ -3,7 +3,6 @@
 use Netzhirsch\ContaoSliderBundle\SliderDatabase;
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'] = [[SliderDatabase::class,'updateSliderJavaScript']];
-$GLOBALS['TL_DCA']['tl_content']['config']['ctable'] = ['tl_nh_slider'];
 
 $fields = [
     'adaptiveHeight' => [

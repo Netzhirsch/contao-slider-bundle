@@ -7,6 +7,8 @@ use Contao\ContentElement;
 use Contao\System;
 use Doctrine\ORM\EntityManagerInterface;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
 
 class SliderStart extends ContentElement
 {
@@ -38,12 +40,15 @@ class SliderStart extends ContentElement
 
             return $objTemplate->parse();
         }
-        $buildDir = System::getContainer()->get('kernel')->getProjectDir();
-        if (file_exists($buildDir.DIRECTORY_SEPARATOR.'web')) {
-            $publicDir = 'web';
-        } else {
-            $publicDir = 'public';
+        $projectDir = System::getContainer()->get('kernel')->getProjectDir();
+        try {
+            $publicDir = $this->getComposerPublicDir($projectDir);
+        } catch (\JsonException $e) {
+            return parent::generate();
         }
+        if (empty($publicDir))
+            return parent::generate();
+
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick.css|static';
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick-theme.css|static';
         $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick.min.js|static';
@@ -64,6 +69,23 @@ class SliderStart extends ContentElement
      */
     protected function compile()
     {
+    }
+
+    private function getComposerPublicDir(string $projectDir): ?string
+    {
+        $fs = new Filesystem();
+
+        if (!$fs->exists($composerJsonFilePath = Path::join($projectDir, 'composer.json'))) {
+            return null;
+        }
+
+        $composerConfig = json_decode(file_get_contents($composerJsonFilePath), true, 512, JSON_THROW_ON_ERROR);
+
+        if (null === ($publicDir = $composerConfig['extra']['public-dir'] ?? null)) {
+            return null;
+        }
+
+        return $publicDir;
     }
 
 }

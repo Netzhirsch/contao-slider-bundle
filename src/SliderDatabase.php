@@ -25,9 +25,12 @@ class SliderDatabase
      */
     public function saveToSlider($value,DC_Table $dc)
     {
+        $field = $dc->field;
+        if ($field == 'type')
+            return $value;
+
         if (empty($value))
             $value = 0;
-        $field = $dc->field;
         $breakpoint = $this->getBreakpoint($field);
         $field = str_replace('nh_'.$breakpoint.'_', '', $field);
 
@@ -59,6 +62,7 @@ class SliderDatabase
             return 'slider_start';
 
         }
+
         return $value;
     }
 

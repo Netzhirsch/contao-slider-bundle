@@ -34,7 +34,7 @@ class SlideDivider extends ContentElement
 		if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
-			$objTemplate->wildcard = '### ' . 'Netzhirsch Slide Start' . ' ###';
+			$objTemplate->wildcard = '### ' . 'Netzhirsch Slide Trenner' . ' ###';
 			$objTemplate->title = $this->headline;
 
 			return $objTemplate->parse();

@@ -37,8 +37,8 @@ class Slider
     private bool $draggable = false;
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $infinite = false;
-    #[ORM\Column(length: 255,nullable: true)]
-    private ?string $initialSlide = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $initialSlide = null;
     #[ORM\Column(length: 12, options: ['default' => 'ondemand'])]
     private ?string $lazyLoad = 'ondemand';
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
@@ -191,12 +191,12 @@ class Slider
         $this->infinite = $infinite;
     }
 
-    public function getInitialSlide(): ?string
+    public function getInitialSlide(): ?int
     {
         return $this->initialSlide;
     }
 
-    public function setInitialSlide(?string $initialSlide): void
+    public function setInitialSlide(?int $initialSlide): void
     {
         $this->initialSlide = $initialSlide;
     }

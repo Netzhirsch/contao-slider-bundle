@@ -162,7 +162,7 @@ $fields = [
         'load_callback' => [[SliderDatabase::class, 'loadFromSlider']],
     ],
     'slidesToShow' => [
-        'label' => ['Anzahl der angezeigten Slides',''],
+        'label' => ['Anzahl der angezeigten Slides','Pro Abschnitt'],
         'inputType' => 'text',
         'eval' => [
             'tl_class'  =>  'w50',
@@ -173,7 +173,7 @@ $fields = [
         'load_callback' => [[SliderDatabase::class, 'loadFromSlider']],
     ],
     'slidesToScroll' => [
-        'label' => ['Slides pro Seite',''],
+        'label' => ['Anzahl Slider die auf einmal gescrollt werden',''],
         'inputType' => 'text',
         'eval' => [
             'tl_class'  =>  'w50',
@@ -196,7 +196,7 @@ $fields = [
     ],
     'swipe' => [
         'label' => ['Wischgesten aktivieren',''],
-        'inputType' => 'text',
+        'inputType' => 'checkbox',
         'eval' => [
             'tl_class'  =>  'w50',
             'alwaysSave' => true,

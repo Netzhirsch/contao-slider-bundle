@@ -204,16 +204,6 @@ $fields = [
         'save_callback' => [[SliderDatabase::class, 'saveToSlider']],
         'load_callback' => [[SliderDatabase::class, 'loadFromSlider']],
     ],
-    'swipeToSlide' => [
-        'label' => ['Wischen für nächstes Slide','Ermöglichen Sie Benutzern, unabhängig von slidesToScroll direkt zu einer Folie zu ziehen oder zu wischen.'],
-        'inputType' => 'checkbox',
-        'eval' => [
-            'tl_class'  =>  'w50',
-            'alwaysSave' => true,
-        ],
-        'save_callback' => [[SliderDatabase::class, 'saveToSlider']],
-        'load_callback' => [[SliderDatabase::class, 'loadFromSlider']],
-    ],
     'touchMove' => [
         'label' => ['Slide-Bewegung per Touch',''],
         'inputType' => 'checkbox',
@@ -279,7 +269,6 @@ foreach ($breakpoints as $breakpoint) {
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'slidesToScroll'] = $fields['slidesToScroll'];
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'speed'] = $fields['speed'];
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'swipe'] = $fields['swipe'];
-    $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'swipeToSlide'] = $fields['swipeToSlide'];
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'touchMove'] = $fields['touchMove'];
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'variableWidth'] = $fields['variableWidth'];
     $GLOBALS['TL_DCA']['tl_content']['fields']['nh_'.$breakpoint.'_'.'zIndex'] = $fields['zIndex'];
@@ -306,7 +295,6 @@ foreach ($breakpoints as $breakpoint) {
         $newFields['nh_'.$breakpoint.'_'.'pauseOnDotsHover'] = $fields['pauseOnDotsHover'];
         $newFields['nh_'.$breakpoint.'_'.'speed'] = $fields['speed'];
         $newFields['nh_'.$breakpoint.'_'.'swipe'] = $fields['swipe'];
-        $newFields['nh_'.$breakpoint.'_'.'swipeToSlide'] = $fields['swipeToSlide'];
         $newFields['nh_'.$breakpoint.'_'.'touchMove'] = $fields['touchMove'];
         $newFields['nh_'.$breakpoint.'_'.'variableWidth'] = $fields['variableWidth'];
     }

@@ -238,7 +238,6 @@ class SliderDatabase
             'slidesToShow' => empty($slider->getSlidesToShow())?1:$slider->getSlidesToShow(),
             'slidesToScroll' => empty($slider->getSlidesToScroll())?1:$slider->getSlidesToScroll(),
             'swipe' => $slider->isSwipe(),
-            'swipeToSlide' => $slider->isSwipeToSlide(),
             'touchMove' => $slider->isTouchMove(),
             'variableWidth' => $slider->isVariableWidth(),
             'zIndex' => empty($slider->getZIndex())?1000:$slider->getZIndex(),

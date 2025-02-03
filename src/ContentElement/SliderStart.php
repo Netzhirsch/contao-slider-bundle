@@ -61,6 +61,7 @@ class SliderStart extends ContentElement
         } else {
             $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlick-ceId-'.$this->id.'-v-'.$slider->getVersion().'.js|static';
         }
+        $em->detach($slider);
         return parent::generate();
     }
 

@@ -55,8 +55,6 @@ class Slider
     private ?int $speed = 300;
     #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $swipe = true;
-    #[ORM\Column(type: 'boolean', options: ['default' => false])]
-    private bool $swipeToSlide = false;
     #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $touchMove = true;
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
@@ -279,16 +277,6 @@ class Slider
     public function setSwipe(bool $swipe): void
     {
         $this->swipe = $swipe;
-    }
-
-    public function isSwipeToSlide(): bool
-    {
-        return $this->swipeToSlide;
-    }
-
-    public function setSwipeToSlide(bool $swipeToSlide): void
-    {
-        $this->swipeToSlide = $swipeToSlide;
     }
 
     public function isTouchMove(): bool

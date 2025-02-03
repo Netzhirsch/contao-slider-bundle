@@ -116,6 +116,8 @@ class SliderDatabase
         $em = $this->entityManager;
         $repo = $em->getRepository(Slider::class);
         $sliders = $repo->findBy(['contentElementId' => $dc->id]);
+        if (count($sliders) == 0)
+            return;
         $settings = $this->settings($sliders);
         $projectDir = System::getContainer()->get('kernel')->getProjectDir();
         $dir = $projectDir
@@ -240,7 +242,6 @@ class SliderDatabase
             'slidesToShow' => empty($slider->getSlidesToShow())?1:$slider->getSlidesToShow(),
             'slidesToScroll' => empty($slider->getSlidesToScroll())?1:$slider->getSlidesToScroll(),
             'swipe' => $slider->isSwipe(),
-            'swipeToSlide' => $slider->isSwipeToSlide(),
             'touchMove' => $slider->isTouchMove(),
             'variableWidth' => $slider->isVariableWidth(),
             'zIndex' => empty($slider->getZIndex())?1000:$slider->getZIndex(),

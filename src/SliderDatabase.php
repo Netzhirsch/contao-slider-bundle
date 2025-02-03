@@ -129,10 +129,14 @@ class SliderDatabase
             .'public'
         ;
         $jsFile = $dir.DIRECTORY_SEPARATOR.'mySlickTemplate.js';
-        /** @var Slider $firstSlider */
-        $firstSlider = $sliders[array_key_first($sliders)];
-        $version = $firstSlider->getVersion();
-        $version++;
+        if (!empty($sliders)) {
+            /** @var Slider $firstSlider */
+            $firstSlider = $sliders[array_key_first($sliders)];
+            $version = $firstSlider->getVersion();
+            $version++;
+        } else {
+            $version = 1;
+        }
         /** @var Slider $slider */
         foreach ($sliders as $slider) {
             $slider->setVersion($version);

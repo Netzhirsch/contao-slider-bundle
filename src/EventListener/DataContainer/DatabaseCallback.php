@@ -12,7 +12,7 @@ class DatabaseCallback
 
     public function __construct(
         private readonly SliderRepository $sliderRepository,
-        private readonly DCAService $dcaService
+        private readonly DCAService $dcaService,
     )
     {
     }

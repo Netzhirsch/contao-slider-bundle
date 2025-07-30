@@ -6,11 +6,13 @@ use Contao\ContentModel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
+use Netzhirsch\ContaoSliderBundle\SliderDatabase;
 
 readonly class DCAService
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
+        private readonly  SliderDatabase $sliderDatabase
     )
     {
     }
@@ -25,6 +27,7 @@ readonly class DCAService
         foreach ($entities as $entity) {
             $newEntity = clone $entity;
             $newEntity->setContentElementId($newId);
+            $this->sliderDatabase->updateSliderJavaScriptByContent($id,$newId);
             $this->entityManager->persist($newEntity);
         }
         if (empty($entities)) {
@@ -40,6 +43,9 @@ readonly class DCAService
                 $newEntity = new Slider();
                 $newEntity->setBreakpoint($breakpoint);;
                 $newEntity->setContentElementId($newId);
+                if ($newEntity->getBreakpoint() == 'xs') {
+                    $this->sliderDatabase->updateSliderJavaScriptByContent($newId);
+                }
                 $this->entityManager->persist($newEntity);
             }
         }
@@ -86,6 +92,9 @@ readonly class DCAService
                     $newEntity->setContentElementId($newContent->id);
                     $this->entityManager->persist($newEntity);
                     $this->entityManager->flush();
+                    if ($newEntity->getBreakpoint() == 'xs') {
+                        $this->sliderDatabase->updateSliderJavaScriptByContent($newContent->id);
+                    }
                 }
             }
         }

@@ -113,9 +113,14 @@ class SliderDatabase
     {
         if (!$this->isSliderContent($dc))
             return;
-        $em = $this->entityManager;
-        $repo = $em->getRepository(Slider::class);
-        $sliders = $repo->findBy(['contentElementId' => $dc->id]);
+
+        $this->updateSliderJavaScriptByContent($dc->id);
+    }
+
+    public function updateSliderJavaScriptByContent(int $id)
+    {
+        $repo = $this->entityManager->getRepository(Slider::class);
+        $sliders = $repo->findBy(['contentElementId' => $id]);
         if (count($sliders) == 0)
             return;
         $settings = $this->settings($sliders);
@@ -142,20 +147,20 @@ class SliderDatabase
         /** @var Slider $slider */
         foreach ($sliders as $slider) {
             $slider->setVersion($version);
-            $em->persist($slider);
+            $this->entityManager->persist($slider);
         }
         if (file_exists($jsFile) && count($settings) > 0) {
             $content = file_get_contents($jsFile);
             $content = str_replace('__setting__', json_encode($settings),$content);
-            $content = str_replace('__class__', "'.nh-slick-".$dc->id."'",$content);
-            $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$dc->id.'-v-'.$version.'.js';
+            $content = str_replace('__class__', "'.nh-slick-".$id."'",$content);
+            $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$id.'-v-'.$version.'.js';
             file_put_contents($filename, $content);
-            $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$dc->id.'-v-'.--$version.'.js';
+            $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$id.'-v-'.--$version.'.js';
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }
         }
-        $em->flush();
+        $this->entityManager->flush();
     }
     private function getBreakpoint($field): string
     {

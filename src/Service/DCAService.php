@@ -83,18 +83,20 @@ readonly class DCAService
 
         if (!empty($entities)) {
             foreach ($entities as $entity) {
+                $newContentId = null;
                 foreach ($ids as $key => $contentElementId) {
                     $newContent = $newContents->offsetGet($key);
                     if (empty($newContent) || $contentElementId != $entity->getContentElementId()) {
                         continue;
                     }
                     $newEntity = clone $entity;
-                    $newEntity->setContentElementId($newContent->id);
+                    $newContentId = $newContent->id;
+                    $newEntity->setContentElementId($newContentId);
                     $this->entityManager->persist($newEntity);
                     $this->entityManager->flush();
-                    if ($newEntity->getBreakpoint() == 'xs') {
-                        $this->sliderDatabase->updateSliderJavaScriptByContent($newContent->id);
-                    }
+                }
+                if (!empty($newContentId)) {
+                    $this->sliderDatabase->updateSliderJavaScriptByContent($newContentId);
                 }
             }
         }

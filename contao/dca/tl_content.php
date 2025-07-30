@@ -314,7 +314,13 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['slider_start'] = implode(';', $pal
 
 $palettes = [];
 $palettes[] = '{type_legend},type';
+// Defaults
+$palettes[] = '{protected_legend:hide},protected';
+$palettes[] = '{expert_legend:hide},guests,cssID';
+$palettes[] = '{invisible_legend:hide},invisible,start,stop';
+$palettes[] = '{template_legend},customTpl';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['slide_start'] = implode(';', $palettes);
 $GLOBALS['TL_DCA']['tl_content']['palettes']['slider_end'] = implode(';', $palettes);
 $GLOBALS['TL_DCA']['tl_content']['palettes']['slide_end'] = implode(';', $palettes);
+$GLOBALS['TL_DCA']['tl_content']['palettes']['slide_divider'] = implode(';', $palettes);

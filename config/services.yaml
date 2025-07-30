@@ -1,6 +1,14 @@
 services:
   _defaults:
     autoconfigure: true
+    autowire: true
+
+  Netzhirsch\ContaoSliderBundle\:
+    resource: ../src
+    exclude:
+      - ../src/DependencyInjection/
+      - ../src/ContentElement/
+    public: true
 
   Netzhirsch\ContaoSliderBundle\SliderDatabase:
     public: true

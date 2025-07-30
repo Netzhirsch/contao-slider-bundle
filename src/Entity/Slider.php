@@ -67,6 +67,7 @@ class Slider
     public function __clone(): void
     {
         $this->id = null;
+        $this->version = 1;
     }
 
     public function getId(): ?int

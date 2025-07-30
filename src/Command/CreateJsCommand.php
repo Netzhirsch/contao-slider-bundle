@@ -13,7 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'contao_slider:create_js', description: 'Hello PhpStorm')]
+#[AsCommand(name: 'contao_slider:create_js', description: 'Nach einem Update des Bundle verschwinden die JS-Datein. Mit diesem Command werden diese wieder erzeugt.')]
 class CreateJsCommand extends Command
 {
 

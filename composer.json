@@ -1,7 +1,7 @@
 {
 	"name": "netzhirsch/contao-slider-bundle",
     "description": "Slider Inhaltselement",
-    "version": "0.1.7",
+    "version": "0.2.0",
     "keywords": [
         "contao",
         "slider",
@@ -91,10 +91,6 @@
     ],
     "support": {
         "email": "luhmann@netzhirsch.de"
-    },
-    "require": {
-        "php": ">=7.0",
-        "contao/core-bundle": ">4.13.35|<6"
     },
     "conflict": {
         "contao/core": "*"

@@ -37,7 +37,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
      * @throws Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void {
-        $loader->load(static function (ContainerBuilder $container) {
+        $loader->load(static function (ContainerBuilder $container): void {
             $container->addCompilerPass(new class implements CompilerPassInterface {
                 public function process(ContainerBuilder $container): void {
                     $container->getAlias('logger')->setPublic(true);

@@ -64,6 +64,12 @@ class Slider
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
     private ?int $version = 1;
 
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->version = 1;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

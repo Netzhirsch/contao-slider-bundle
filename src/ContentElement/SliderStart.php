@@ -30,12 +30,13 @@ class SliderStart extends ContentElement
      *
      * @return string
      */
+    #[\Override]
     public function generate()
     {
         $request = System::getContainer()->get('request_stack')->getCurrentRequest();
         if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
             $objTemplate = new BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### '.'Netzhirsch Slider Start'.' ###';
+            $objTemplate->wildcard = '### Netzhirsch Slider Start ###';
             $objTemplate->title = $this->headline;
 
             return $objTemplate->parse();
@@ -43,11 +44,12 @@ class SliderStart extends ContentElement
         $projectDir = System::getContainer()->get('kernel')->getProjectDir();
         try {
             $publicDir = $this->getComposerPublicDir($projectDir);
-        } catch (\JsonException $e) {
+        } catch (\JsonException) {
             return parent::generate();
         }
-        if (empty($publicDir))
+        if (in_array($publicDir, [null, '', '0'], true)) {
             return parent::generate();
+        }
 
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick.css|static';
         $GLOBALS['TL_CSS'][] = $publicDir.'/bundles/contaoslider/libraries/slick-carousel/slick/slick-theme.css|static';

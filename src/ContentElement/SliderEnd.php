@@ -27,14 +27,15 @@ class SliderEnd extends ContentElement
 	 *
 	 * @return string
 	 */
-	public function generate()
+	#[\Override]
+    public function generate()
 	{
 		$request = System::getContainer()->get('request_stack')->getCurrentRequest();
 
 		if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
-			$objTemplate->wildcard = '### ' . 'Netzhirsch Slider End' . ' ###';
+			$objTemplate->wildcard = '### Netzhirsch Slider End ###';
 			$objTemplate->title = $this->headline;
 
 			return $objTemplate->parse();

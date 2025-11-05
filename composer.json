@@ -1,7 +1,7 @@
 {
 	"name": "netzhirsch/contao-slider-bundle",
     "description": "Slider Inhaltselement",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "keywords": [
         "contao",
         "slider",

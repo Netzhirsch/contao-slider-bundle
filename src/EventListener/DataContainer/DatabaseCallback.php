@@ -20,7 +20,7 @@ class DatabaseCallback
     #[AsCallback('tl_content', 'config.oncopy_callback')]
     public function onCopyContent(string $id,DC_Table $dc): void
     {
-        if (!empty($dc->__get('strTable')) && $dc->getPalette() == $GLOBALS['TL_DCA']['tl_content']['palettes']['slider_start']) {
+        if (!empty($dc->__get('table')) && $dc->getPalette() == $GLOBALS['TL_DCA']['tl_content']['palettes']['slider_start']) {
             $this->dcaService->cloneByContent($this->sliderRepository,$dc->id,$id);
         }
     }

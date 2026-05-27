@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
 use Netzhirsch\ContaoSliderBundle\Repository\SliderRepository;
+use Netzhirsch\ContaoSliderBundle\Service\SliderService;
+use Symfony\Component\Filesystem\Filesystem;
 
 class SliderDatabase
 {
@@ -154,6 +156,9 @@ class SliderDatabase
             $content = file_get_contents($jsFile);
             $content = str_replace('__setting__', json_encode($settings, JSON_THROW_ON_ERROR),$content);
             $content = str_replace('__class__', "'.nh-slick-".$id."'",$content);
+            $dir = System::getContainer()->get(SliderService::class)->getCustomJavaScript();
+            $fileSystem = new Filesystem();
+            $fileSystem->mkdir($dir);
             $filename = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$id.'-v-'.$version.'.js';
             file_put_contents($filename, $content);
             $oldFile = $dir.DIRECTORY_SEPARATOR.'mySlick-ceId-'.$id.'-v-'.--$version.'.js';

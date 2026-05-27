@@ -7,6 +7,7 @@ use Contao\ContentElement;
 use Contao\System;
 use Doctrine\ORM\EntityManagerInterface;
 use Netzhirsch\ContaoSliderBundle\Entity\Slider;
+use Netzhirsch\ContaoSliderBundle\Service\SliderService;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 
@@ -61,7 +62,8 @@ class SliderStart extends ContentElement
         if (empty($slider)) {
             $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlickDefault.js|static';
         } else {
-            $GLOBALS['TL_JAVASCRIPT'][] = $publicDir.'/bundles/contaoslider/mySlick-ceId-'.$this->id.'-v-'.$slider->getVersion().'.js|static';
+            $filesDis = System::getContainer()->get(SliderService::class)->getCustomJavaScript(true);
+            $GLOBALS['TL_JAVASCRIPT'][] = $filesDis.'/mySlick-ceId-'.$this->id.'-v-'.$slider->getVersion().'.js|static';
         }
         $em->detach($slider);
         return parent::generate();
